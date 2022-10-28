@@ -22,10 +22,10 @@ public class RitemLine {
         this.itemCount = itemCount;
            this.invoice = invoice;
     }
-    public int getItemNo() {
+    public int getItemNum() {
         return itemNum;
     }
-     public void setItemNo(int itemNo) {
+     public void setItemNum(int itemNo) {
         this.itemNum = itemNum;
     }
 

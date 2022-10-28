@@ -36,7 +36,7 @@ public class RitemTableModel extends AbstractTableModel  {
     public Object getValueAt(int rowIndex, int columnIndex) {
         RitemLine item = items.get(rowIndex);
         switch (columnIndex) {
-            case 0: return item.getItemNo();
+            case 0: return item.getItemNum();
             case 1: return item.getItemName();
             case 2: return item.getItemPrice();
             case 3: return item.getItemCount();

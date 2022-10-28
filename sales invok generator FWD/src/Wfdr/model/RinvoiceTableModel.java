@@ -35,11 +35,11 @@ public class RinvoiceTableModel extends AbstractTableModel {
         RinvoiceHeader inv = invoices.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return inv.getNum();
+                return inv.getInvNum();
             case 1: 
-                return inv.getName();
+                return inv.getCustomerName();
             case 2:
-                return RinvFrame.sdf.format(inv.getDate());
+                return RinvFrame.sdf.format(inv.getInvDate());
             case 3:
                 return inv.getTotal();
             default:

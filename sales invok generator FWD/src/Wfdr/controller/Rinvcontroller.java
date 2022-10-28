@@ -55,10 +55,10 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
             frame.setRitemTableModel(new RitemTableModel());
         } else {
             RinvoiceHeader selectedInvoice = frame.getInvoices().get(selectedRow);
-            frame.getCustomerName().setText(selectedInvoice.getName());
-            frame.getInvNum().setText("" + selectedInvoice.getNum());
+            frame.getCustomerName().setText(selectedInvoice.getCustomerName());
+            frame.getInvNum().setText("" + selectedInvoice.getInvNum());
             frame.getInvoiceTotal().setText("" + selectedInvoice.getTotal());
-            frame.getInvoiceDate().setText(RinvFrame.sdf.format(selectedInvoice.getDate()));
+            frame.getInvoiceDate().setText(RinvFrame.sdf.format(selectedInvoice.getInvDate()));
             frame.setRitemTableModel(new RitemTableModel(selectedInvoice.getLines()) {});
         }
     }
@@ -77,12 +77,12 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
                 deleteInvoice();
                 break;
 
-            case "Save Item ":
-                saveItem();
+            case "New Item ":
+                newItem();
                 break;
 
-            case "Cancel":
-                cancel();
+            case "Delet Item":
+                deletItem();
                 break;
 
             case "Load File":
@@ -124,18 +124,7 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
         
     }
 
-    private void cancel() {
-        int selectedInvoice = frame.getInvoicesTable().getSelectedRow();
-        int selectedItem = frame.getItemsTable().getSelectedRow();
-        if (selectedInvoice != -1 && selectedItem != -1) {
-            InvoiceHeader invoice = frame.getInvoices().get(selectedInvoice);
-            invoice.getLines().remove(selectedItem);
-            frame.getRitemTableModel().fireTableDataChanged();
-            frame.geRinvoiceTableModel().fireTableDataChanged();
-            frame.getInvTable().setRowSelectionInterval(selectedInvoice, selectedInvoice);
-        }
-        //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     private void saveFile() {
         //To change body of generated methods, choose Tools | Templates.
@@ -225,10 +214,8 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
 
         //To change body of generated methods, choose Tools | Templates.
 
-    public void loadFile(String rinvoiceHeadercsv, String ritemLinecsv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    }
+  
+    
 
     private void newItemOK() {
          String name = lineDialog.getItemNameField().getText();
@@ -250,20 +237,63 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
     }
 
     private void newInvoiceCancel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            String dateStr = headerDialog.getInvDateField().getText();
+            String name = headerDialog.getCustNameField().getText();
+
+            Date date = frame.sdf.parse(dateStr);
+            int num = frame.getNextInvNum();
+            RinvoiceHeader inv = new RinvoiceHeader(num, date, name);
+            frame.getInvoices().add(inv);
+            frame.getRinvoiceTableModel().fireTableDataChanged();
+            newInvoiceCancel();
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(frame, "Error in Date format", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
     }
 
     private void newInvoiceOK() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        headerDialog.setVisible(false);
+        headerDialog.dispose();
+        headerDialog = null;
+        
+        
+        
     }
-
-    private void saveItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+private void newItem() {
+       int selectedInvoice = frame.getInvTable().getSelectedRow();
+        if (selectedInvoice == -1) {
+            JOptionPane.showMessageDialog(frame, "First, select Invoice to add item to it", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            lineDialog = new RinvoiceLineDialog(frame);
+            lineDialog.setVisible(true);//To change body of generated methods, choose Tools | Templates.
     }
 
    
-          }
          //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void deletItem() {
+       int selectedInvoice = frame.getInvTable().getSelectedRow();
+        int selectedItem = frame.getItemTable().getSelectedRow();
+        if (selectedInvoice != -1 && selectedItem != -1) {
+           RinvoiceHeader invoice = frame.getInvoices().get(selectedInvoice);
+            invoice.getLines().remove(selectedItem);
+            frame.getRitemTableModel().fireTableDataChanged();
+            frame.getRinvoiceTableModel().fireTableDataChanged();
+            frame.getInvTable().setRowSelectionInterval(selectedInvoice, selectedInvoice);
+        }
+    }
+
+   
+
+   
+          }
+        
     
         
     
@@ -271,14 +301,12 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
 
     
 
-    private void cancel() {
-    }
+  
 
     
 
-    private void saveFile() {
-    }
+    
 
    
    
-    }
+    

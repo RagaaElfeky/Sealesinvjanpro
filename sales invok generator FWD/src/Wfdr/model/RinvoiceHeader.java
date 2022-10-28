@@ -40,27 +40,27 @@ public class RinvoiceHeader {
         return lines;
     }
 
-    public String getName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setName(String customerName) {
+    public void setCustomerName(String customerName) {
          this.customerName = customerName;
     }
 
-    public int getNum() {
+    public int getInvNum() {
         return invNum;
     }
 
-    public void setNum(int invNum) {
+    public void setInvNum(int invNum) {
         this.invNum = invNum;
     }
 
-    public Date getDate() {
+    public Date getInvDate() {
         return invDate;
     }
 
-    public void setDate(Date invDate) {
+    public void setInvDate(Date invDate) {
         this.invDate = invDate;
     }
       @Override
