@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Wfdr.view;
-import java.awt.Frame;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -62,12 +62,6 @@ public class RinvoiceHeaderDialog extends JDialog {
         return invDateField;
     }
 
-    private void setLayout(GridLayout gridLayout) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }

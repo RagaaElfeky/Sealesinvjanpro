@@ -27,7 +27,7 @@ import Wfdr.model.RitemTableModel;
 import Wfdr.view.RinvFrame;
 import Wfdr.view.RinvoiceHeaderDialog;
 import Wfdr.view.RinvoiceLineDialog;
-import javax.swing.table.TableModel;
+
 
 
 /**
@@ -48,17 +48,17 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
         System.out.println("Row Selected");
         int selectedRow = frame.getInvTable().getSelectedRow();
         if (selectedRow == -1) {
-            frame.getCustNameLbl().setText("");
-            frame.getInvNumLbl().setText("");
-            frame.getInvNumLbl().setText("");
-            frame.getInvDateLbl().setText("");
+            frame.getCustName().setText("");
+            frame.getInvNum().setText("");
+            frame.getInvNum().setText("");
+            frame.getInvDate().setText("");
             frame.setRitemTableModel(new RitemTableModel());
         } else {
             RinvoiceHeader selectedInvoice = frame.getInvoices().get(selectedRow);
-            frame.getCustNameLbl().setText(selectedInvoice.getCustomerName());
-            frame.getInvNumLbl().setText("" + selectedInvoice.getInvoiceNum());
-            frame.getInvNumLbl().setText("" + selectedInvoice.getTotal());
-            frame.getInvDateLbl().setText(RinvFrame.sdf.format(selectedInvoice.getInvDate()));
+            frame.getCustName().setText(selectedInvoice.getCustomerName());
+            frame.getInvNum().setText("" + selectedInvoice.getInvoiceNum());
+            frame.getInvTotal().setText("" + selectedInvoice.getTotal());
+            frame.getInvDate().setText(RinvFrame.sdf.format(selectedInvoice.getInvDate()));
             frame.setRitemTableModel(new RitemTableModel(selectedInvoice.getLines()) {});
         }
     }
@@ -111,7 +111,7 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
     }
     
   private void newInvoice() {
-       RinvoiceHeaderDialog headerDialog = new RinvoiceHeaderDialog(frame);
+       headerDialog  = new RinvoiceHeaderDialog(frame);
         headerDialog.setVisible(true);
     }
 
@@ -236,7 +236,7 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
         lineDialog = null;
     }
 
-    private void newInvoiceCancel() {
+    private void newInvoiceOK() {
          try {
             String dateStr = headerDialog.getInvDateField().getText();
             String name = headerDialog.getCustNameField().getText();
@@ -255,7 +255,7 @@ public class Rinvcontroller implements ActionListener, ListSelectionListener{
         
     }
 
-    private void newInvoiceOK() {
+    private void newInvoiceCancel() {
         
         headerDialog.setVisible(false);
         headerDialog.dispose();

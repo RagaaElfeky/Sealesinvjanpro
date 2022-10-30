@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Wfdr.view;
+package Wfdr.view; 
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -36,8 +37,8 @@ public class RinvoiceLineDialog extends JDialog {
         okBtn = new JButton("OK");
         cancelBtn = new JButton("Cancel");
         
-        okBtn.setActionCommand("newLineOK");
-        cancelBtn.setActionCommand("newLineCancel");
+        okBtn.setActionCommand("newItemOK");
+        cancelBtn.setActionCommand("newItemCancel");
         
         okBtn.addActionListener(frame.getController());
         cancelBtn.addActionListener(frame.getController());
@@ -69,19 +70,4 @@ public class RinvoiceLineDialog extends JDialog {
         return itemPriceField;
     }
 
-    private void add(JLabel itemNameLbl) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void add(JTextField itemNameField) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
